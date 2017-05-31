@@ -37,7 +37,7 @@ public class Arene extends Pane{
 	private static Circle currentBall;
 	private static boolean alreadyDie;
 	
-	public Arene(Pistolero p, List<Vampire> vampires){
+	public Arene(Pistolero p, List<Vampire> vampires) {
 		pistolero = p;
 		this.vampires = vampires;
 		pistolero.setLayoutX(p.getPosX());
@@ -84,15 +84,19 @@ public class Arene extends Pane{
 							this.getChildren().remove(v);
 							break;
 						}
-						
 					}
 				}
 			} while (goodPoint);
 			
+			coordinates.add(v.getBoundsInParent());
+		}
+		for (int i = 0; i < this.vampires.size(); i++) {
+			Vampire v = this.vampires.get(i);
 			Timeline timeline = new Timeline();
 		    timeline.setCycleCount(1);
 		    timeline.getKeyFrames().add(restart(v));
-		    for(int j=0;j<i;j++){
+	    	intersect();
+	    	for(int j=0;j<vampires.size() && j!=i;j++){
 		    	Vampire vbefore = vampires.get(j);
 		    	if(v.getBoundsInParent().intersects(vbefore.getBoundsInParent())){
 		    		System.out.println("Intersect v-v");
@@ -106,10 +110,9 @@ public class Arene extends Pane{
 		    timeline.play();
 		    timeline.setOnFinished(e -> {
 		    	timeline.getKeyFrames().add(restart(v));
-		    	timeline.playFromStart();
+		    	timeline.play();
+		    	//timeline.play();
 		    });
-
-			//coordinates.add(v.getBoundsInParent());
 		}
 		//this.getChildren().addAll(this.vampires);
 	}
@@ -117,8 +120,8 @@ public class Arene extends Pane{
 	public KeyFrame restart(Vampire v){
 		KeyValue kv;
 		KeyFrame kf;
-		Random generator = new Random();
-		int r = generator.nextInt(3);
+		Random g1= new Random();
+		int r = g1.nextInt(3);
 		if(r==0){
 			v.rotateToEst();
 		    kv = new KeyValue(v.layoutXProperty(), 500);
@@ -144,6 +147,9 @@ public class Arene extends Pane{
 			Vampire v = vampires.get(i);
 			if(v.getBoundsInParent().intersects(pistolero.getBoundsInParent())){
 				System.out.println("Intersec vampire pistolero");
+			}
+			if(pistolero.getLayoutX() == v.getLayoutX() && pistolero.getLayoutY()==v.getLayoutY()){
+				System.out.println("Same v-p");
 			}
 		}
 	}
