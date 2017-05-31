@@ -31,7 +31,7 @@ public class Pistolero extends ImageView{
 		posY = (int)((Math.random() * (Arene.SIZE - HEIGHT) ) + 1);
 		Image img;
 		try {
-			img = new Image(new FileInputStream("/home/anhndmin/workspace/VP/src/view/el_pistolero.png"));
+			img = new Image(new FileInputStream("/home/soul/workspace/VampiresPistolero/src/view/el_pistolero.png"));
 			this.setImage(img);
 			this.setFitWidth(WIDTH);
 			this.setFitHeight(HEIGHT);

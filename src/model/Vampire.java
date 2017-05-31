@@ -28,7 +28,7 @@ public class Vampire extends ImageView{
 		posY = (int)((Math.random() * (Arene.SIZE - HEIGHT) ) + 1);
 		Image img;
 		try {
-			img = new Image(new FileInputStream("/home/anhndmin/workspace/VP/src/view/zombie_walk.gif"));
+			img = new Image(new FileInputStream("/home/soul/workspace/VampiresPistolero/src/view/zombie_walk.gif"));
 			this.setImage(img);
 			this.setFitWidth(WIDTH);
 			this.setFitHeight(HEIGHT);
