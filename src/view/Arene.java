@@ -38,7 +38,7 @@ public class Arene extends Pane{
 	private MediaPlayer sound;
 	private List<Bounds> coordinates;
 	
-	public Arene(Pistolero p, List<Vampire> vampires){
+	public Arene(Pistolero p, List<Vampire> vampires) {
 		pistolero = p;
 		this.vampires = vampires;
 		pistolero.setLayoutX(p.getPosX());
@@ -89,29 +89,29 @@ public class Arene extends Pane{
 					}
 				}
 			} while (goodPoint);
-			coordinates.add(v.getBoundsInParent());
+			//coordinates.add(v.getBoundsInParent());
 			
+			coordinates.add(v.getBoundsInParent());
+		}
+		for (int i = 0; i < this.vampires.size(); i++) {
+			Vampire v = this.vampires.get(i);
 			Timeline timeline = new Timeline();
 		    timeline.setCycleCount(1);
 		    timeline.getKeyFrames().add(restart(v));
-		    for(int j=0;j<i;j++){
+	    	intersect();
+	    	for(int j=0;j<vampires.size() && j!=i;j++){
 		    	Vampire vbefore = vampires.get(j);
-		    	if(v.getBoundsInParent().intersects(vbefore.getBoundsInParent())){
-		    		System.out.println("Intersect v-v");
-		    		getChildren().remove(vbefore);
+		    	if((v.getLayoutX()!= vbefore.getLayoutX()) && v.getBoundsInParent().intersects(vbefore.getBoundsInParent())){
+		    		System.out.println("Intersect v-v!!");
+		    		getChildren().remove(v);
 		    	}
 		    }
-	    	if(v.getBoundsInParent().intersects(pistolero.getBoundsInParent())){
-	    		getChildren().remove(pistolero);
-	    		System.out.println("Intersec v-p");
-	    	}
 		    timeline.play();
 		    timeline.setOnFinished(e -> {
 		    	timeline.getKeyFrames().add(restart(v));
-		    	timeline.playFromStart();
+		    	timeline.play();
+		    	//timeline.play();
 		    });
-
-			//coordinates.add(v.getBoundsInParent());
 		}
 		//this.getChildren().addAll(this.vampires);
 	}
@@ -119,25 +119,25 @@ public class Arene extends Pane{
 	public KeyFrame restart(Vampire v){
 		KeyValue kv;
 		KeyFrame kf;
-		Random generator = new Random();
-		int r = generator.nextInt(3);
+		Random g1= new Random();
+		int r = g1.nextInt(3);
 		if(r==0){
 			v.rotateToEst();
 		    kv = new KeyValue(v.layoutXProperty(), 550);
 		}
 		else if(r==1){
 			v.rotateToNorth();
-		    kv = new KeyValue(v.layoutYProperty(), -5);
+		    kv = new KeyValue(v.layoutYProperty(), -10);
 		}
 		else if(r==2){
 			v.rotateToWest();
-		    kv = new KeyValue(v.layoutXProperty(), -5);
+		    kv = new KeyValue(v.layoutXProperty(), -10);
 		}
 		else {
 			v.rotateToSouth();
 		    kv = new KeyValue(v.layoutYProperty(), 550);
 		}
-		kf = new KeyFrame(Duration.seconds(2), kv);
+		kf = new KeyFrame(Duration.seconds(5), kv);
 		return kf;
 	}
 
@@ -146,6 +146,9 @@ public class Arene extends Pane{
 			Vampire v = vampires.get(i);
 			if(v.getBoundsInParent().intersects(pistolero.getBoundsInParent())){
 				System.out.println("Intersec vampire pistolero");
+			}
+			if(pistolero.getLayoutX() == v.getLayoutX() && pistolero.getLayoutY()==v.getLayoutY()){
+				System.out.println("Same v-p");
 			}
 		}
 	}
@@ -188,7 +191,7 @@ public class Arene extends Pane{
 	    	);
 	    for (int i = 0; i < this.vampires.size(); i++) {
 	    	Vampire v = vampires.get(i);
-	    	if(v.getBoundsInParent().intersects(ball.getBoundsInParent())){
+	    	if(ball.getBoundsInParent().intersects(v.getBoundsInParent())){
 	    		this.getChildren().remove(v);
 	    		System.out.println("Good shoot up!");
 	    	}
