@@ -24,9 +24,9 @@ public class Case extends Canvas {
 	private Image wallIcon;
 	private boolean wall;
 	private static final int LENGTH = 60;
-	private final String V_IMG_URL = "/home/soul/workspace/VampiresPistolero/src/view/vamp.png";
-	private final String P_IMG_URL = "/home/soul/workspace/VampiresPistolero/src/view/pis.png";
-	private final String M_IMG_URL = "/home/soul/workspace/VampiresPistolero/src/view/mur_icon.png";
+	private final String V_IMG_URL = "/home/anhndmin/workspace/VP/src/view/vamp.png";
+	private final String P_IMG_URL = "/home/anhndmin/workspace/VP/src/view/pis.png";
+	private final String M_IMG_URL = "/home/anhndmin/workspace/VP/src/view/mur_icon.png";
 	
 	
 	public Case(int ligne, int colonne){

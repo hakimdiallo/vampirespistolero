@@ -25,12 +25,13 @@ public class Pistolero extends ImageView{
 	private MediaPlayer sound;
 
 	public Pistolero(){
+		vie=3;
 		arme = BALLES;
 		posX = (int)((Math.random() * (Arene.SIZE - HEIGHT) ) + 1);
 		posY = (int)((Math.random() * (Arene.SIZE - HEIGHT) ) + 1);
 		Image img;
 		try {
-			img = new Image(new FileInputStream("/home/soul/workspace/VampiresPistolero/src/view/el_pistolero.png"));
+			img = new Image(new FileInputStream("/home/anhndmin/workspace/VP/src/view/el_pistolero.png"));
 			this.setImage(img);
 			this.setFitWidth(WIDTH);
 			this.setFitHeight(HEIGHT);
@@ -67,6 +68,10 @@ public class Pistolero extends ImageView{
 		if (vie > 0) {
 			vie--;
 		}
+	}
+	
+	public boolean estMort(){
+		return vie==0;
 	}
 	
 	public int getArme(){

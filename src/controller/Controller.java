@@ -24,35 +24,35 @@ public class Controller implements EventHandler<KeyEvent>{
 	public void handle(KeyEvent event) {
 		switch (event.getCode()) {
 		case UP:
-			System.out.println("UP "+pistolero.getPosX()+" "+pistolero.getPosY()+" "+canMooveUp());
+			//System.out.println("UP "+pistolero.getPosX()+" "+pistolero.getPosY()+" "+canMooveUp());
 			pistolero.rotateToNorth();
 			if (canMooveUp() ){//&& !arene.getCase(pistolero.getPosX()-1, pistolero.getPosY()).isWall()) {
 				pistolero.moveUp();
 			}
 			break;
 		case LEFT:
-			System.out.println("LEFT "+pistolero.getPosX()+" "+pistolero.getPosY()+" "+canMooveLeft());
+			//System.out.println("LEFT "+pistolero.getPosX()+" "+pistolero.getPosY()+" "+canMooveLeft());
 			pistolero.rotateToWest();
 			if (canMooveLeft() ){//&& !arene.getCase(pistolero.getPosX(), pistolero.getPosY()-1).isWall()) {
 				pistolero.moveLeft();
 			}
 			break;
 		case DOWN:
-			System.out.println("DOWN "+pistolero.getPosX()+" "+pistolero.getPosY()+" "+canMooveDown());
+			//System.out.println("DOWN "+pistolero.getPosX()+" "+pistolero.getPosY()+" "+canMooveDown());
 			pistolero.rotateToSouth();
 			if (canMooveDown() ){//&& !arene.getCase(pistolero.getPosX()+1, pistolero.getPosY()).isWall()) {
 				pistolero.moveDown();
 			}
 			break;
 		case RIGHT:
-			System.out.println("RIGHT "+pistolero.getPosX()+" "+pistolero.getPosY()+" "+canMooveRight());
+			//System.out.println("RIGHT "+pistolero.getPosX()+" "+pistolero.getPosY()+" "+canMooveRight());
 			pistolero.rotateToEst();
 			if (canMooveRight() ){//&& !arene.getCase(pistolero.getPosX(), pistolero.getPosY()+1).isWall()) {
 				pistolero.moveRight();
 			}
 			break;
 		case SPACE:
-			System.out.println("SPACE "+pistolero.getPosX()+" "+pistolero.getPosY());
+			//System.out.println("SPACE "+pistolero.getPosX()+" "+pistolero.getPosY());
 			if (!pistolero.armeVide()) {
 				switch ((int)pistolero.getRotate()) {
 				case 0:
@@ -73,12 +73,13 @@ public class Controller implements EventHandler<KeyEvent>{
 			}else{
 				pistolero.rechargerArme();
 			}
-			System.out.println(arene.getChildren().contains(vampires));
+			//System.out.println(arene.getChildren().contains(vampires));
 			break;
 		default:
 			break;
 		}	
 	}
+	
 	
 	public boolean canMooveUp(){
 		return pistolero.getPosY() > 0;
